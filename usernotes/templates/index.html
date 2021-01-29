@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="header-login">
+      {% if user.is_authenticated %}
+        <a href="{% url 'Logout' %}">Log Out</a>
+      {% else %}
+        <a href="{% url 'Login' %}">Login/Signup</a>
+      {% endif %}
+    </div>
+
+    <h2>Your Notes</h2>
+    <h3>Add New Notes Here</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ newnote.as_p }}
+      <button type="submit">Add A New Note</button>
+    </form>
+    <h3>NOTES: </h3><br>
+    {% for note in notes %}
+    <ul>
+      <li>{{ note.note }}</li>
+      <li>{{ note.created }}</li>
+    </ul>
+
+    {% endfor %}
+
+
+  </body>
+</html>
